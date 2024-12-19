@@ -22,14 +22,14 @@ class OpenAIImageAnalyzer:
 
         if prompt is None:
             with open(OpenAIImageAnalyzer.PROMPT_PATH, "r") as f:
-                self.prompt = f.read()
+                prompt = f.read()
+        self.prompt = prompt
 
         if model_name not in OpenAIImageAnalyzer.SUPPORTED_MODELS:
             raise ValueError(
                 f"Invalid model name. Supported models: {OpenAIImageAnalyzer.SUPPORTED_MODELS}"
             )
-        else:
-            self.model_name = model_name
+        self.model_name = model_name
 
     def _load_and_encode_image(self, image_path: str) -> str:
         """
