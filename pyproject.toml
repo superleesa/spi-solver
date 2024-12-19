@@ -14,15 +14,21 @@ streamlit = "^1.41.1"
 watchdog = "^6.0.0"
 fire = "^0.7.0"
 openai = "^1.58.1"
+torch = "2.5.0"
+intel-extension-for-pytorch = "2.5.0"
+autoawq = "^0.2.7"
+qwen-vl-utils = "0.0.8"
+transformers = "^4.47.1"
+torchvision = "0.20.0"
 
 [tool.poetry.extras]
 qwen = [
-    torch = "2.5.0",
-    intel-extension-for-pytorch = "2.5.0",
-    autoawq = "^0.2.7",
-    qwen-vl-utils = "0.0.8",
-    transformers = "^4.47.1",
-    torchvision = "0.20.0",
+    "torch",
+    "intel-extension-for-pytorch",
+    "autoawq",
+    "qwen-vl-utils",
+    "transformers",
+    "torchvision",
 ]
 
 [tool.ruff.lint]
