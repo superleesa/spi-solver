@@ -2,6 +2,7 @@ import base64
 from pathlib import Path
 from typing import Generator
 
+from dotenv import load_dotenv
 from openai import OpenAI
 
 
@@ -16,6 +17,7 @@ class OpenAIImageAnalyzer:
         Args:
             api_key (str): Your OpenAI API key.
         """
+        load_dotenv()
         self.client = OpenAI()
 
         if prompt is None:
