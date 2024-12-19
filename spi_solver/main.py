@@ -29,10 +29,11 @@ def main(screenshot_dir: str | None) -> None:
     thread.start()
 
     with placeholder.container():
-        st.write("Watching directory for changes...")
+        st.write("Waiting for new SPI question screenshots...")
         while True:
             if image_queue:
-                image_path = image_queue.pop(0)
+                st.write("Found a new image! Analyzing...")
+                image_path = image_queue.pop(0)  # FIXME: use queue instead of list
                 st.write_stream(analyzer.ask_about_picture(image_path))
             else:
                 time.sleep(1)

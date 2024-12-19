@@ -7,10 +7,10 @@ from openai import OpenAI
 
 
 class OpenAIImageAnalyzer:
-    PROMPT_PATH = Path(__file__).parent / "prompts" / "solve_spi_prompt.txt"
+    PROMPT_PATH = Path(__file__).parent.parent / "prompts" / "solve_spi_prompt.txt"
     SUPPORTED_MODELS = ["gpt-4o", "gpt-4o-mini", "o1", "o1-mini"]
 
-    def __init__(self, prompt: str | None = None, model_name: str = "gpt4o") -> None:
+    def __init__(self, prompt: str | None = None, model_name: str = "gpt-4o") -> None:
         """
         Initialize the OpenAI client with the provided API key.
 
@@ -65,7 +65,7 @@ class OpenAIImageAnalyzer:
 
         # see: https://platform.openai.com/docs/guides/vision#uploading-base64-encoded-images
         try:
-            response = self.client.ChatCompletion.create(
+            response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[
                     {
