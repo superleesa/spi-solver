@@ -72,14 +72,14 @@ class OpenAIImageAnalyzer:
                         "role": "system",
                         "content": self.prompt,
                     },
-                    {"role": "user", "content": f"Analyze this image: {encoded_image}"},
                     {
                         "role": "user",
                         "content": [
                             {
                                 "type": "image_url",
                                 "image_url": {
-                                    "url": f"data:image/jpeg;base64,{encoded_image}"
+                                    "url": f"data:image/jpeg;base64,{encoded_image}",
+                                    "detail": "low",  # TODO: experiment this: see https://platform.openai.com/docs/guides/vision#low-or-high-fidelity-image-understanding
                                 },
                             },
                         ],
@@ -89,10 +89,9 @@ class OpenAIImageAnalyzer:
             )
 
             for chunk in response:
-                if "choices" in chunk and len(chunk["choices"]) > 0:
-                    delta = chunk["choices"][0]["delta"]
-                    if "content" in delta:
-                        yield delta["content"]
+                content = chunk.choices[0].delta.content
+                if content is not None:
+                    yield content
 
         except Exception as e:
             yield f"An error occurred while interacting with the OpenAI API: {e}"
